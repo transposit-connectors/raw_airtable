@@ -1,0 +1,35 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Airtable
+servers:
+  - url: https://api.airtable.com/v0
+paths:
+  /{baseId}/{table}:
+    get:
+      operationId: getRecords
+      parameters:
+        - name: baseId
+          in: path
+          description: The airtable base id
+          required: true
+          schema:
+            type: string
+        - name: table
+          in: path
+          description: The table you are querying within the base
+          required: true
+          schema:
+            type: string
+        - name: sort
+          in: query
+          required: false
+          style: deepObject
+          explode: true
+          schema:
+            type: array
+        - name: maxRecords
+          in: query
+          schema:
+            type: integer
+            format: int32

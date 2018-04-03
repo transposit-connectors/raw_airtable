@@ -1,6 +1,15 @@
 {
   "v2": {
-    "transposit": {
+    "swagger": {
+      "auth": {
+        "type": "PARAMETER",
+        "params": {
+          "name": {
+            "string": "api_key"
+          }
+        }
+      },
+      "source": "airtable.yaml"
     }
   }
 }
