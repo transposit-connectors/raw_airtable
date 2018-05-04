@@ -33,3 +33,75 @@ paths:
           schema:
             type: integer
             format: int32
+    post:
+      operationId: createRecord
+      parameters:
+        - name: baseId
+          in: path
+          description: The airtable base id
+          required: true
+          schema:
+            type: string
+        - name: table
+          in: path
+          description: The table you are querying within the base
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: New record to add
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+  /{baseId}/{table}/{recordId}:
+    delete:
+      operationId: deleteRecord
+      parameters:
+        - name: baseId
+          in: path
+          description: The airtable base id
+          required: true
+          schema:
+            type: string
+        - name: table
+          in: path
+          description: The table you are querying within the base
+          required: true
+          schema:
+            type: string
+        - name: recordId
+          in: path
+          description: The record you want to delete
+          required: true
+          schema:
+            type: string 
+    patch:
+      operationId: updateRecord
+      parameters:
+        - name: baseId
+          in: path
+          description: The airtable base id
+          required: true
+          schema:
+            type: string
+        - name: table
+          in: path
+          description: The table you are querying within the base
+          required: true
+          schema:
+            type: string
+        - name: recordId
+          in: path
+          description: The record you want to update
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Record to update
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
