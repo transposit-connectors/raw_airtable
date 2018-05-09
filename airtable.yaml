@@ -33,6 +33,10 @@ paths:
           schema:
             type: integer
             format: int32
+        - name: filterByFormula
+          in: query
+          schema:
+            type: string
     post:
       operationId: createRecord
       parameters:
