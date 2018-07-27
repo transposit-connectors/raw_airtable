@@ -58,6 +58,27 @@ paths:
         description: New record to add
         required: true
   /{baseId}/{table}/{recordId}:
+    get:
+      operationId: get_record
+      parameters:
+      - description: The airtable base id
+        in: path
+        name: baseId
+        required: true
+        schema:
+          type: string
+      - description: The table you are querying within the base
+        in: path
+        name: table
+        required: true
+        schema:
+          type: string
+      - description: The record you want to fetch
+        in: path
+        name: recordId
+        required: true
+        schema:
+          type: string
     delete:
       operationId: delete_record
       parameters:
