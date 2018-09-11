@@ -35,6 +35,9 @@ paths:
         name: filterByFormula
         schema:
           type: string
+      responses:
+        200:
+          description: ""
     post:
       operationId: create_record
       parameters:
@@ -57,6 +60,9 @@ paths:
               type: string
         description: New record to add
         required: true
+      responses:
+        200:
+          description: ""
   /{baseId}/{table}/{recordId}:
     get:
       operationId: get_record
@@ -79,6 +85,9 @@ paths:
         required: true
         schema:
           type: string
+      responses:
+        200:
+          description: ""
     delete:
       operationId: delete_record
       parameters:
@@ -100,6 +109,9 @@ paths:
         required: true
         schema:
           type: string
+      responses:
+        200:
+          description: ""
     patch:
       operationId: update_record
       parameters:
@@ -128,5 +140,8 @@ paths:
               type: string
         description: Record to update
         required: true
+      responses:
+        200:
+          description: ""
 servers:
 - url: https://api.airtable.com/v0
