@@ -2,6 +2,7 @@
   "v2": {
     "swagger": {
       "auth": {
+        "description": "You can find your api key at https://airtable.com/account."
         "type": "PARAMETER",
         "params": {
           "name": {
