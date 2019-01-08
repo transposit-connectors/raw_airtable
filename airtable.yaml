@@ -25,6 +25,9 @@ paths:
         required: false
         schema:
           type: array
+          items:
+            type:
+              object
         style: deepObject
       - in: query
         name: maxRecords
