@@ -38,6 +38,18 @@ paths:
         name: filterByFormula
         schema:
           type: string
+      - description: The offset parameter, if available
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: string
+      - description: The page size
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          type: integer
       responses:
         200:
           description: ""
