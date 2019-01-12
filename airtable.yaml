@@ -1,25 +1,15 @@
 info:
   title: Airtable
-  version: 1.0.0
+  version: "1.0.4"
 openapi: 3.0.0
 paths:
   /{baseId}/{table}:
+    parameters:
+      - $ref: "#/components/parameters/baseId"
+      - $ref: "#/components/parameters/table"
     get:
       operationId: get_records
       parameters:
-      - description: The airtable base id
-        in: path
-        name: baseId
-        required: true
-        schema:
-          type: string
-      - description: The table you are querying within the base
-        in: path
-        name: table
-        required: true
-        schema:
-          type: string
-      - explode: true
         in: query
         name: sort
         required: false
@@ -55,19 +45,6 @@ paths:
           description: ""
     post:
       operationId: create_record
-      parameters:
-      - description: The airtable base id
-        in: path
-        name: baseId
-        required: true
-        schema:
-          type: string
-      - description: The table you are querying within the base
-        in: path
-        name: table
-        required: true
-        schema:
-          type: string
       requestBody:
         content:
           application/json:
@@ -79,75 +56,22 @@ paths:
         200:
           description: ""
   /{baseId}/{table}/{recordId}:
+    parameters:
+      - $ref: "#/components/parameters/baseId"
+      - $ref: "#/components/parameters/table"
+      - $ref: "#/components/parameters/recordId"
     get:
       operationId: get_record
-      parameters:
-      - description: The airtable base id
-        in: path
-        name: baseId
-        required: true
-        schema:
-          type: string
-      - description: The table you are querying within the base
-        in: path
-        name: table
-        required: true
-        schema:
-          type: string
-      - description: The record you want to fetch
-        in: path
-        name: recordId
-        required: true
-        schema:
-          type: string
       responses:
         200:
           description: ""
     delete:
       operationId: delete_record
-      parameters:
-      - description: The airtable base id
-        in: path
-        name: baseId
-        required: true
-        schema:
-          type: string
-      - description: The table you are querying within the base
-        in: path
-        name: table
-        required: true
-        schema:
-          type: string
-      - description: The record you want to delete
-        in: path
-        name: recordId
-        required: true
-        schema:
-          type: string
       responses:
         200:
           description: ""
     patch:
       operationId: update_record
-      parameters:
-      - description: The airtable base id
-        in: path
-        name: baseId
-        required: true
-        schema:
-          type: string
-      - description: The table you are querying within the base
-        in: path
-        name: table
-        required: true
-        schema:
-          type: string
-      - description: The record you want to update
-        in: path
-        name: recordId
-        required: true
-        schema:
-          type: string
       requestBody:
         content:
           application/json:
@@ -158,5 +82,29 @@ paths:
       responses:
         200:
           description: ""
+components:
+  parameters:
+    baseId:
+      description: "The Airtable base ID. This can be found as part of the API documentation URL. Go to https://airtable.com/api and select the base you're interested in, then find the base ID in the resulting URL: https://airtable.com/<baseId>/api/docs."
+      in: path
+      name: baseId
+      required: true
+      schema:
+        type: string
+    table:
+      description: The table being referenced within the base. This table must already exist.
+      in: path
+      name: table
+      required: true
+      schema:
+        type: string
+    recordId:
+      description: The record being referenced.
+      in: path
+      name: recordId
+      required: true
+      schema:
+        type: string
+
 servers:
 - url: https://api.airtable.com/v0
