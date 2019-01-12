@@ -11,15 +11,6 @@ paths:
       operationId: get_records
       parameters:
         in: query
-        name: sort
-        required: false
-        schema:
-          type: array
-          items:
-            type:
-              object
-        style: deepObject
-      - in: query
         name: maxRecords
         schema:
           format: int32
