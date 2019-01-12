@@ -10,13 +10,14 @@ paths:
     get:
       operationId: get_records
       parameters:
+      - name: maxRecords
         in: query
-        name: maxRecords
+        description: The maximum total number of records that will be returned in your requests. If this value is larger than pageSize (which is 100 by default), you may have to load multiple pages to reach this total. 
         schema:
           format: int32
           type: integer
-      - in: query
-        name: filterByFormula
+      - name: filterByFormula
+        in: query
         schema:
           type: string
       - description: The offset parameter, if available
@@ -25,9 +26,9 @@ paths:
         required: false
         schema:
           type: string
-      - description: The page size
+      - name: pageSize
         in: query
-        name: pageSize
+        description: The number of records returned in each request. Must be less than or equal to 100. Default is 100.
         required: false
         schema:
           type: integer
