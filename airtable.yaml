@@ -141,14 +141,14 @@ components:
       schema:
         type: string
     table:
-      description: The table being referenced within the base. This table must already exist.
+      description: "The name of the table being referenced within the base. This table must already exist."
       in: path
       name: table
       required: true
       schema:
         type: string
     recordId:
-      description: The record being referenced.
+      description: "The record being referenced. Find the record through a get_records call, then find its recordId there."
       in: path
       name: recordId
       required: true
