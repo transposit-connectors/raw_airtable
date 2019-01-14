@@ -50,6 +50,30 @@ paths:
         required: false
         schema:
           type: integer
+      - name: view
+        in: query
+        required: false
+        description: The name or ID of a view in the endpoints table. If set, only the records in that view will be returned. The records will be sorted according to the order of the view.
+        schema:
+          type: string
+      - name: cellFormat
+        in: query
+        required: false
+        description: 'The format that should be used for cell values. Supported values are: "json": cells will be formatted as JSON, depending on the field type. "string": cells will be formatted as user-facing strings, regardless of the field type. Note: You should not rely on the format of these strings, as it is subject to change. The default is "json".'
+        schema:
+          type: string
+      - name: timeZone
+        in: query
+        required: false
+        description: 'The time zone that should be used to format dates when using "string" as the cellFormat. This parameter is required when using "string" as the cellFormat.'
+        schema:
+          type: string
+      - name: userLocale
+        in: query
+        required: false
+        description: 'The user locale that should be used to format dates when using "string" as the cellFormat. This parameter is required when using "string" as the cellFormat.'
+        schema:
+          type: string
       responses:
         200:
           description: ""
