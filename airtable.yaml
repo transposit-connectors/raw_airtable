@@ -106,6 +106,7 @@ paths:
           description: ""
     patch:
       operationId: update_record
+      description: To update some (but not all) fields of a endpoints record. Any fields that are not included will not be updated.
       requestBody:
         content:
           application/json:
@@ -116,6 +117,20 @@ paths:
       responses:
         200:
           description: ""
+    put:
+      operationId: update_all_fields_of_record
+      description: To update all fields of a endpoints record. Any fields that are not included will be cleared.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        description: Record to update
+        required: true
+      responses:
+        200:
+          description: ""
+
 components:
   parameters:
     baseId:
