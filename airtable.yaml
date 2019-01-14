@@ -26,6 +26,16 @@ paths:
         required: false
         schema:
           type: string
+      - name: sort
+        explode: true
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type:
+              object
+        style: deepObject
       - name: pageSize
         in: query
         description: The number of records returned in each request. Must be less than or equal to 100. Default is 100.
