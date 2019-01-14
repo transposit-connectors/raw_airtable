@@ -4,38 +4,20 @@ info:
 openapi: 3.0.0
 paths:
   /{baseId}/{table}:
+    parameters:
+      - $ref: "#/components/parameters/baseId"
+      - $ref: "#/components/parameters/table"
     get:
       operationId: get_records
       parameters:
-      - description: The airtable base id
-        in: path
-        name: baseId
-        required: true
-        schema:
-          type: string
-      - description: The table you are querying within the base
-        in: path
-        name: table
-        required: true
-        schema:
-          type: string
-      - explode: true
+      - name: maxRecords
         in: query
-        name: sort
-        required: false
-        schema:
-          type: array
-          items:
-            type:
-              object
-        style: deepObject
-      - in: query
-        name: maxRecords
+        description: The maximum total number of records that will be returned in your requests. If this value is larger than pageSize (which is 100 by default), you may have to load multiple pages to reach this total. 
         schema:
           format: int32
           type: integer
-      - in: query
-        name: filterByFormula
+      - name: filterByFormula
+        in: query
         schema:
           type: string
       - description: The offset parameter, if available
@@ -44,30 +26,59 @@ paths:
         required: false
         schema:
           type: string
-      - description: The page size
+      - name: sort
+        explode: true
         in: query
-        name: pageSize
+        required: false
+        schema:
+          type: array
+          items:
+            type:
+              object
+        style: deepObject
+      - name: field # this parameter does not work as OpenAPI thinks it should
+        explode: true
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: pageSize
+        in: query
+        description: The number of records returned in each request. Must be less than or equal to 100. Default is 100.
         required: false
         schema:
           type: integer
+      - name: view
+        in: query
+        required: false
+        description: The name or ID of a view in the endpoints table. If set, only the records in that view will be returned. The records will be sorted according to the order of the view.
+        schema:
+          type: string
+      - name: cellFormat
+        in: query
+        required: false
+        description: 'The format that should be used for cell values. Supported values are: "json": cells will be formatted as JSON, depending on the field type. "string": cells will be formatted as user-facing strings, regardless of the field type. Note: You should not rely on the format of these strings, as it is subject to change. The default is "json".'
+        schema:
+          type: string
+      - name: timeZone
+        in: query
+        required: false
+        description: 'The time zone that should be used to format dates when using "string" as the cellFormat. This parameter is required when using "string" as the cellFormat.'
+        schema:
+          type: string
+      - name: userLocale
+        in: query
+        required: false
+        description: 'The user locale that should be used to format dates when using "string" as the cellFormat. This parameter is required when using "string" as the cellFormat.'
+        schema:
+          type: string
       responses:
         200:
           description: ""
     post:
       operationId: create_record
-      parameters:
-      - description: The airtable base id
-        in: path
-        name: baseId
-        required: true
-        schema:
-          type: string
-      - description: The table you are querying within the base
-        in: path
-        name: table
-        required: true
-        schema:
-          type: string
       requestBody:
         content:
           application/json:
@@ -79,75 +90,23 @@ paths:
         200:
           description: ""
   /{baseId}/{table}/{recordId}:
+    parameters:
+      - $ref: "#/components/parameters/baseId"
+      - $ref: "#/components/parameters/table"
+      - $ref: "#/components/parameters/recordId"
     get:
       operationId: get_record
-      parameters:
-      - description: The airtable base id
-        in: path
-        name: baseId
-        required: true
-        schema:
-          type: string
-      - description: The table you are querying within the base
-        in: path
-        name: table
-        required: true
-        schema:
-          type: string
-      - description: The record you want to fetch
-        in: path
-        name: recordId
-        required: true
-        schema:
-          type: string
       responses:
         200:
           description: ""
     delete:
       operationId: delete_record
-      parameters:
-      - description: The airtable base id
-        in: path
-        name: baseId
-        required: true
-        schema:
-          type: string
-      - description: The table you are querying within the base
-        in: path
-        name: table
-        required: true
-        schema:
-          type: string
-      - description: The record you want to delete
-        in: path
-        name: recordId
-        required: true
-        schema:
-          type: string
       responses:
         200:
           description: ""
     patch:
       operationId: update_record
-      parameters:
-      - description: The airtable base id
-        in: path
-        name: baseId
-        required: true
-        schema:
-          type: string
-      - description: The table you are querying within the base
-        in: path
-        name: table
-        required: true
-        schema:
-          type: string
-      - description: The record you want to update
-        in: path
-        name: recordId
-        required: true
-        schema:
-          type: string
+      description: To update some (but not all) fields of a endpoints record. Any fields that are not included will not be updated.
       requestBody:
         content:
           application/json:
@@ -158,5 +117,43 @@ paths:
       responses:
         200:
           description: ""
+    put:
+      operationId: update_all_fields_of_record
+      description: To update all fields of a endpoints record. Any fields that are not included will be cleared.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+        description: Record to update
+        required: true
+      responses:
+        200:
+          description: ""
+
+components:
+  parameters:
+    baseId:
+      description: "The Airtable base ID. This can be found as part of the API documentation URL. Go to https://airtable.com/api and select the base you're interested in, then find the base ID in the resulting URL: https://airtable.com/<baseId>/api/docs."
+      in: path
+      name: baseId
+      required: true
+      schema:
+        type: string
+    table:
+      description: "The name of the table being referenced within the base. This table must already exist."
+      in: path
+      name: table
+      required: true
+      schema:
+        type: string
+    recordId:
+      description: "The record being referenced. Find the record through a get_records call, then find its recordId there."
+      in: path
+      name: recordId
+      required: true
+      schema:
+        type: string
+
 servers:
 - url: https://api.airtable.com/v0
