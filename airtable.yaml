@@ -1,6 +1,6 @@
 info:
   title: Airtable
-  version: 1.0.0
+  version: "1.0.4"
 openapi: 3.0.0
 paths:
   /{baseId}/{table}:
@@ -83,7 +83,7 @@ paths:
         content:
           application/json:
             schema:
-              type: string
+              $ref: "#/components/schemas/record"
         description: New record to add
         required: true
       responses:
@@ -111,7 +111,7 @@ paths:
         content:
           application/json:
             schema:
-              type: string
+              $ref: "#/components/schemas/record"
         description: Record to update
         required: true
       responses:
@@ -124,7 +124,7 @@ paths:
         content:
           application/json:
             schema:
-              type: string
+              $ref: "#/components/schemas/record"
         description: Record to update
         required: true
       responses:
@@ -154,6 +154,13 @@ components:
       required: true
       schema:
         type: string
-
+  schemas:
+    record:
+      type: object
+      required:
+        - fields
+      properties:
+        fields:
+          type: object
 servers:
 - url: https://api.airtable.com/v0
