@@ -37,8 +37,15 @@ paths:
         schema:
           type: array
           items:
-            type:
-              object
+            type: object
+            properties:
+              field:
+                type: string
+              direction:
+                type: string
+                enum:
+                  - asc
+                  - desc
         style: deepObject
       - name: field # this parameter does not work as OpenAPI thinks it should
         explode: true
