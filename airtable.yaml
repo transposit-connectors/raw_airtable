@@ -145,7 +145,7 @@ paths:
 components:
   parameters:
     baseId:
-      description: "The Airtable base ID. This can be found as part of the API documentation URL. Go to https://airtable.com/api and select the base you're interested in, then find the base ID in the resulting URL: https://airtable.com/<baseId>/api/docs."
+      description: "The Airtable base ID. This can be found as part of the API documentation URL. Go to https://airtable.com/api and select the base you're interested in, then find the base ID in the resulting URL: https://airtable.com/[baseId]/api/docs."
       in: path
       name: baseId
       required: true
