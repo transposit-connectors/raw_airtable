@@ -6,6 +6,8 @@ info:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
 openapi: 3.0.0
+externalDocs:
+  url: https://airtable.com/api
 paths:
   /{baseId}/{table}:
     parameters:
