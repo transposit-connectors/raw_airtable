@@ -16,77 +16,77 @@ paths:
     get:
       operationId: get_records
       parameters:
-      - name: maxRecords
-        in: query
-        description: The maximum total number of records that will be returned in your requests. If this value is larger than pageSize (which is 100 by default), you may have to load multiple pages to reach this total. 
-        schema:
-          format: int32
-          type: integer
-      - name: filterByFormula
-        in: query
-        schema:
-          type: string
-      - description: The offset parameter, if available
-        in: query
-        name: offset
-        required: false
-        schema:
-          type: string
-      - name: sort
-        explode: true
-        in: query
-        required: false
-        schema:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              direction:
-                type: string
-                enum:
-                  - asc
-                  - desc
-        style: deepObject
-      - name: field # this parameter does not work as OpenAPI thinks it should
-        explode: true
-        in: query
-        required: false
-        schema:
-          type: array
-          items:
+        - name: maxRecords
+          in: query
+          description: The maximum total number of records that will be returned in your requests. If this value is larger than pageSize (which is 100 by default), you may have to load multiple pages to reach this total.
+          schema:
+            format: int32
+            type: integer
+        - name: filterByFormula
+          in: query
+          schema:
             type: string
-      - name: pageSize
-        in: query
-        description: The number of records returned in each request. Must be less than or equal to 100. Default is 100.
-        required: false
-        schema:
-          type: integer
-      - name: view
-        in: query
-        required: false
-        description: The name or ID of a view in the endpoints table. If set, only the records in that view will be returned. The records will be sorted according to the order of the view.
-        schema:
-          type: string
-      - name: cellFormat
-        in: query
-        required: false
-        description: 'The format that should be used for cell values. Supported values are: "json": cells will be formatted as JSON, depending on the field type. "string": cells will be formatted as user-facing strings, regardless of the field type. Note: You should not rely on the format of these strings, as it is subject to change. The default is "json".'
-        schema:
-          type: string
-      - name: timeZone
-        in: query
-        required: false
-        description: 'The time zone that should be used to format dates when using "string" as the cellFormat. This parameter is required when using "string" as the cellFormat.'
-        schema:
-          type: string
-      - name: userLocale
-        in: query
-        required: false
-        description: 'The user locale that should be used to format dates when using "string" as the cellFormat. This parameter is required when using "string" as the cellFormat.'
-        schema:
-          type: string
+        - description: The offset parameter, if available
+          in: query
+          name: offset
+          required: false
+          schema:
+            type: string
+        - name: sort
+          explode: true
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                field:
+                  type: string
+                direction:
+                  type: string
+                  enum:
+                    - asc
+                    - desc
+          style: deepObject
+        - name: field # this parameter does not work as OpenAPI thinks it should
+          explode: true
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: pageSize
+          in: query
+          description: The number of records returned in each request. Must be less than or equal to 100. Default is 100.
+          required: false
+          schema:
+            type: integer
+        - name: view
+          in: query
+          required: false
+          description: The name or ID of a view in the endpoints table. If set, only the records in that view will be returned. The records will be sorted according to the order of the view.
+          schema:
+            type: string
+        - name: cellFormat
+          in: query
+          required: false
+          description: 'The format that should be used for cell values. Supported values are: "json": cells will be formatted as JSON, depending on the field type. "string": cells will be formatted as user-facing strings, regardless of the field type. Note: You should not rely on the format of these strings, as it is subject to change. The default is "json".'
+          schema:
+            type: string
+        - name: timeZone
+          in: query
+          required: false
+          description: 'The time zone that should be used to format dates when using "string" as the cellFormat. This parameter is required when using "string" as the cellFormat.'
+          schema:
+            type: string
+        - name: userLocale
+          in: query
+          required: false
+          description: 'The user locale that should be used to format dates when using "string" as the cellFormat. This parameter is required when using "string" as the cellFormat.'
+          schema:
+            type: string
       responses:
         200:
           description: ""
@@ -176,4 +176,4 @@ components:
         fields:
           type: object
 servers:
-- url: https://api.airtable.com/v0
+  - url: https://api.airtable.com/v0
